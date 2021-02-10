@@ -1,0 +1,34 @@
+import { Model } from "mongoose";
+import { PostService } from "../mail/mail.service";
+import { PuppeteerService } from "../parse/parse.service";
+import { StatsService } from "../statistic/stats.service";
+import { CustomerSubscribeDto } from "../users/customer/dto/customer.subsctibe.dto";
+import { CryptService } from "./crypt.service";
+import { CreateInstaAccountDto } from "./dto/create.insta.account.dto";
+import { ParseInstaAccountDto } from "./dto/parse.insta.account.dto";
+import { InstaDocument } from './insta.shcema';
+export declare class InstaService {
+    private instaModel;
+    private parseService;
+    private cryptSerive;
+    private statsService;
+    private postService;
+    constructor(instaModel: Model<InstaDocument>, parseService: PuppeteerService, cryptSerive: CryptService, statsService: StatsService, postService: PostService);
+    findById(id: object): Promise<any>;
+    findOne(id: object, CreateInstaAccountDto: CreateInstaAccountDto): Promise<any>;
+    getMainAccount(user_id: object): Promise<any>;
+    setCostAccount(_id: object, cost: number): Promise<any>;
+    findAccount(_id: object): Promise<any>;
+    findAccountByName(login: string): Promise<any>;
+    updateVisited(count: number, name: string): Promise<any>;
+    updateSubscribe(count: number, name: string): Promise<any>;
+    findAcccountByProfile(profile: string): Promise<InstaDocument>;
+    createAccount(user_id: object, CreateInstaAccountDto: CreateInstaAccountDto): Promise<any>;
+    getAllAccounts(userid: object): Promise<any>;
+    setMain(_id: object, user_id: object): Promise<boolean>;
+    deleteAcccount(user_id: object, id: object): Promise<any>;
+    parseAcccount(_id: object, ParseInstaAccountDto: ParseInstaAccountDto): Promise<any>;
+    createRemoveSubscribeLink(nickname: any): Promise<void>;
+    deleteSubscribe(): Promise<void>;
+    addSubscribe(CustomerSubscribeDto: CustomerSubscribeDto, customer: any): Promise<any>;
+}

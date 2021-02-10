@@ -1,0 +1,67 @@
+<div class="sidenav-custom sidenav show" id="sidenav-main">
+      <!-- Sidenav header -->
+      <div class="sidenav-header d-flex align-items-center">
+        <a class="navbar-brand" href="/">
+          <img src="/img/brand/white.png" class="navbar-brand-img" alt="...">
+        </a>
+        <div class="ml-auto">
+          <!-- Sidenav toggler -->
+          <div class="sidenav-toggler sidenav-toggler-dark side-custom-toggle d-md-none">
+            <div class="sidenav-toggler-inner">
+              <i class="sidenav-toggler-line bg-white"></i>
+              <i class="sidenav-toggler-line bg-white"></i>
+              <i class="sidenav-toggler-line bg-white"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- User mini profile -->
+      <div class="sidenav-user d-flex flex-column align-items-center justify-content-between text-center">
+        <!-- Avatar -->
+        <div>
+          <a href="{{account.profile_url}}" target="_blank" class="avatar rounded-circle avatar-xl">
+            <img alt="Image placeholder" src="{{account.profile_avatar_url}}" class="">
+          </a>
+          <div class="mt-4">
+            <h5 class="mb-0 text-white">{{account.profile_nickname}}</h5>
+            <span class="d-block text-sm text-white opacity-8 mb-3">{{account.profile_name}}</span>
+            <a href="#" class="btn btn-sm btn-white btn-icon rounded-pill shadow hover-translate-y-n3">
+              <span class="btn-inner--icon"><i class="fas fa-coins"></i></span>
+              <span class="btn-inner--text">{{user.balance}} $ </span>
+            </a>
+          </div>
+        </div>
+        <!-- User info -->
+        <!-- Actions -->
+        <div class="w-100 mt-4 actions d-flex justify-content-between">
+          <a href="/" class="action-item action-item-lg text-white pl-0">
+            <i class="fas fa-home"></i>
+          </a>
+          <a href="/instagram/view" class="action-item action-item-lg text-white">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="/payments/owner" class="action-item action-item-lg text-white pr-0">
+            <i class="fas fa-receipt"></i>
+          </a>
+        </div>
+      </div>
+      <!-- Application nav -->
+      <div class="nav-application custom-nav-application mobile-hide clearfix">
+            <a href="/" class="btn btn-square text-sm {{#is page 'home'}} active {{/is}}">
+                <span class="btn-inner--icon d-block"><i class="fas fa-home fa-2x"></i></span>
+                <span class="btn-inner--icon d-block pt-2">Главная</span>
+            </a>
+            <a href="/instagram/view" class="btn btn-square text-sm {{#is page 'account_list'}} active {{/is}}">
+              <span class="btn-inner--icon d-block"> <i class="fas fa-user-cog fa-2x"></i></span>
+              <span class="btn-inner--icon d-block pt-2">Аккаунты</span>
+            </a>
+            <a href="/payments/owner" class="btn btn-square text-sm {{#is page 'payments_owner'}} active {{/is}}">
+              <span class="btn-inner--icon d-block"><i class="fas fa-coins fa-2x"></i></span>
+              <span class="btn-inner--icon d-block pt-2">Финансы</span>
+            </a>
+            <a href="/user/customer" class="btn btn-square text-sm {{#is page 'customer_list'}} active {{/is}}">
+              <span class="btn-inner--icon d-block"><i class="fa fa-users fa-2x"></i></span>
+              <span class="btn-inner--icon d-block pt-2">Пользователи</span>
+            </a>
+      </div>
+    </div>

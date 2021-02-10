@@ -1,0 +1,205 @@
+<!-- Content -->
+<!-- Page content -->
+<div class="page-content">
+   <!-- Modals -->
+        <div class="modal fade" id="modal-add-new-account" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header align-items-center">
+                <div class="modal-title">
+                  <h6 class="mb-0">Добавить учётную запись</h6>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="">
+                <!-- Connections -->
+                <div class="row justify-content-center align-items-start">
+                    <div class="col-12">
+                                      <form method="POST" action="/instagram/add" class="mt-4 send-form">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label class="form-control-label">
+                                            Номер телефона, имя пользователя или эл. адрес
+                                        </label>
+                                        <input required name="login" type="text" class="form-control">
+                                    </div>
+                                     <div class="form-group">
+                                        <label class="form-control-label">
+                                            Имя пользователя Instagram
+                                        </label>
+                                        <input required name="nickname" type="text" class="form-control">
+                                    </div>
+                                    <!-- Project description -->
+                                    <div class="form-group">
+                                        <label class="form-control-label mb-0">
+                                            Пароль
+                                        </label>
+                                        <small class="form-text text-muted mb-2 mt-0">
+                                            Пароли хранятся в зашифрованном виде и известны только вам.
+                                        </small>
+                                        <div class="input-group input-group-merge">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                            </div>
+                                            <input required name="password" type="password" class="form-control"
+                                                id="input-password" placeholder="Password">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <a href="#" data-toggle="password-text"
+                                                        data-target="#input-password">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Buttons -->
+                                <div class="alert alert-danger error-form d-none ml-3 ml-3" role="alert">
+                                    <div></div>
+                                </div>
+                                <div class="text-right">
+                                    <button type="submit" class="btn btn-sm btn-primary rounded-pill m-3">Добавить
+                                        учётную
+                                        запись</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+      
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  <!-- Page title -->
+  <div class="page-title">
+    {{!-- <div class="row justify-content-between align-items-center">
+      <div class="col-md-12 text-center mb-3 mb-md-0">
+        <h5 class="h3 font-weight-400 mb-0 text-white text-left">Учётные записи</h5>
+      </div>
+    </div> --}}
+    <!-- Page content -->
+    <div class="mt-3">
+      <div class="row mt-2">
+        <div class="col-lg-12 order-lg-1">
+          <!-- Listing -->
+        <div class="card">
+          <!-- Card header -->
+          <div class="card-header actions-toolbar border-0">
+            <div class="actions-search" id="actions-search">
+              <div class="input-group input-group-merge input-group-flush">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-transparent"><i class="fas fa-search"></i></span>
+                </div>
+                <input type="text" class="form-control form-control-flush" placeholder="Type and hit enter ...">
+                <div class="input-group-append">
+                  <a href="#" class="input-group-text bg-transparent" data-action="search-close" data-target="#actions-search"><i class="fas fa-times"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-between align-items-center">
+              <div class="col">
+                <h6 class="d-inline-block mb-0">Аккаунты</h6>
+              </div>
+              <div class="col text-right"></div>
+            </div>
+          </div>
+          <!-- Table -->
+          <div class="table-responsive">
+            <table class="table align-items-center">
+              <thead>
+                <tr>
+                  <th scope="col">Имя</th>
+                  <th scope="col">Добавлен</th>
+                  <th scope="col">Посещений</th>
+                  <th scope="col">Всего подписок</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each accounts}}
+                    <tr>
+                    <th scope="row">
+                        <div class="media align-items-center">
+                        <div>
+                            <div class="avatar-parent-child">
+                                <img alt="Image placeholder" src="{{profile_avatar_url}}" class="avatar  rounded-circle">
+                                {{#if main}}
+                                  <span class="avatar-child avatar-badge bg-success"></span>
+                                {{/if}}
+                            </div>
+                        </div>
+                        <div class="media-body ml-4">
+                            <a href="#" class="name h6 mb-0 text-sm">{{profile_name}}</a>
+                            <small class="d-block font-weight-bold"> {{profile_nickname}}</small>
+                        </div>
+                        </div>
+                    </th>
+                    <td>
+                        {{moment createdAt 'YYYY-MM-DD'}}
+                    </td>
+                    <td>
+                        {{total_visited}}
+                    </td>
+                    <td>
+                        {{total_subscribe}}
+                    </td>
+                        <td class="text-right">
+                            <!-- Actions -->
+                            <div class="actions ml-3">
+                                <a target="_blank" href="{{profile_url}}" class="action-item mr-2" data-toggle="tooltip" title="Перейти">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <a href="/instagram/edit/{{_id}}" class="action-item mr-2" data-toggle="tooltip" title="Настройки">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a>
+                                <a href="/instagram/delete/{{_id}}" class="action-item text-danger mr-2" data-toggle="tooltip" title="Удалить">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+               <div class="card">
+              <div class="card-body">
+                <div class="row align-items-center">
+                  <div class="col-sm-12 text-sm-left">
+                    <!-- Add to cart -->
+                    <a href="#modal-add-new-account" class="btn btn-sm btn-white btn-icon rounded-pill" data-toggle="modal">
+                      <span class="btn-inner--icon"><i class="fas fa-users"></i></span>
+                      <span class="btn-inner--text">Добавить аккаунт</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+
+  .modal-content {
+    z-index: 999;
+  }
+
+  .loading-overlay {
+    z-index: 11111 !important;
+  }
+
+</style>

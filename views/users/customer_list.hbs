@@ -1,0 +1,92 @@
+<div class="page-content">
+  <div class="page-title">
+    {{#if data.length }}
+    <!-- Listing -->
+    <div class="card">
+      <!-- Card header -->
+      <div class="card-header actions-toolbar border-0">
+        <div class="row justify-content-between align-items-center">
+          <div class="col">
+            <h6 class="d-inline-block mb-0">Пользователи</h6>
+          </div>
+        </div>
+      </div>
+      <!-- Table -->
+      <div class="table-responsive">
+        <table class="table align-items-center">
+          <thead>
+            <tr>
+              <th scope="col">Имя</th>
+              <th scope="col">Создан</th>
+              <th scope="col">Подписок</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each data}}
+            <tr>
+              <th scope="row">
+                <div class="media align-items-center">
+                  <div>
+                    <div class="avatar-parent-child">
+                      <img alt="Image placeholder" src="{{profile_avatar_url}}" class="avatar  rounded-circle">
+                      <span class="avatar-child avatar-badge bg-success"></span>
+                    </div>
+                  </div>
+                  <div class="media-body ml-4">
+                    <a href="#" class="name h6 mb-0 text-sm">{{profile_nickname}}</a>
+                    <small class="d-block font-weight-bold">{{profile_name}}</small>
+                  </div>
+                </div>
+              </th>
+              <td>
+                {{moment createdAt 'YYYY-MM-DD'}}
+              </td>
+              <td>
+                {{#if purchases.length}}
+                 {{purchases.length}}
+                {{else}}
+                  &mdash;
+                {{/if}}
+              </td>
+              <td class="text-right">
+                <!-- Actions -->
+                <div class="actions ml-3">
+                  <a href="https://instagram.com/{{profile_nickname}}" class="action-item mr-2" data-toggle="tooltip"
+                    title="Посмотреть">
+                    <i class="fas fa-external-link-alt"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+      {{#gt pageCount 1}}
+      <div class="mb-5">
+        <nav aria-label="Page navigation example mt-2 mb-2 pb-5">
+          <ul class="pagination justify-content-end">
+            {{#paginate pagination type="previous"}}
+            <li {{#if disabled}}class="disabled page-item" {{/if}}><a class="page-link" href="?p={{n}}">Пред</a></li>
+            {{/paginate}}
+            {{#paginate pagination type="middle" limit="7"}}
+            <li {{#if active}}class="active page-item" {{/if}}><a class="page-link" href="?p={{n}}">{{n}}</a></li>
+            {{/paginate}}
+            {{#paginate pagination type="next"}}
+            <li {{#if disabled}}class="disabled page-item" {{/if}}><a class="page-link" href="?p={{n}}">След</a></li>
+            {{/paginate}}
+          </ul>
+        </nav>
+      </div>
+      {{/gt}}
+    </div>
+    {{else}}
+        <div class="card mt-2">
+          <div class="card-body">
+             Пользователей связанных с вашим аккаунтом не найдено
+          </div>
+        </div>
+    {{/if}}
+  </div>
+</div>

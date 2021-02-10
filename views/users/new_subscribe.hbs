@@ -1,0 +1,99 @@
+<!-- Chat modal -->
+<!-- Customizer modal -->
+<!-- Application container -->
+<!-- Content -->
+<div class="main-content position-relative">
+    <!-- Page content -->
+    <div class="page-content">
+        <!-- Page title -->
+        <div class="row mt-5">
+            <div class="col-lg-7">
+                <!-- Change avatar -->
+                <div class="card bg-gradient-warning hover-shadow-lg border-0">
+                    <div class="card-body py-3">
+                        <div class="row row-grid align-items-center">
+                            <div class="col-lg-12">
+                                <div class="media align-items-center">
+                                    <div class="media-body">
+                                        <h5 class="text-white mb-0">Оформление платной подписки</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <form action="/user/subscribe" method="POST">
+                            <!-- General information -->
+                            <div class="row">
+                                <div class="col-md-12 col-xs-12">
+                                    <div class="row">
+                                        <div class="col-md-6 col-xs-12">
+                                            <div class="form-group">
+                                                <input type="hidden" name="_id" value="{{owner._id}}">
+                                                <label class="form-control-label">Имя пользователя instagram</label>
+                                                <input class="form-control" name="nickname" type="text"
+                                                    placeholder="Введите имя пользователя">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Email</label>
+                                                <span class="small"></span>
+                                                <input class="form-control" name="email" required type="email"
+                                                    placeholder="Введите почту">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Save changes buttons -->
+                            <button type="submit" class="btn btn-sm mt-2 btn-primary rounded-pill">
+                                Перейти к оплате
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="card">
+                    <div class="list-group list-group-flush">
+                        <div class="list-group-item active">
+                            <div class="media">
+                                <i class="fas fa-user"></i>
+                                <div class="media-body ml-3">
+                                    <span href="settings.html" class="stretched-link h6 mb-1">Пользователь</span>
+                                    <p class="mb-0 text-sm">{{owner.profile_nickname}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="media">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div class="media-body ml-3">
+                                    <span href="addresses.html" class="stretched-link h6 mb-1">Время подписки</span>
+                                    <p class="mb-0 text-sm">30 дней</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="media">
+                                <i class="fas fa-credit-card"></i>
+                                <div class="media-body ml-3">
+                                    <span href="billing.html" class="stretched-link h6 mb-1">Стоимость подписки</span>
+                                    <p class="mb-0 text-sm">{{owner.cost_subscribe}} $</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="card">
+                                После оплаты подписки, вы автоматически получите доступ к закрытому контенту пользователя на 30 дней
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

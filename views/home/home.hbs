@@ -1,0 +1,217 @@
+<!-- Content -->
+<!-- Page content -->
+<div class="page-content">
+  <!-- Page title -->
+
+  {{#if account}}
+  {{#if (isTruthy '_id' account) }}
+  {{> insta_list}}
+  {{/if}}
+  {{else}}
+  {{> form_insta_add}}
+  {{/if}}
+
+  {{#is page 'home'}}
+  <div class="row mt-3 justify-content-end">
+        <div class="col-auto">
+        <form action="/setfilter" method="POST">
+            {{#is type_filter 'year'}}
+              <input type="hidden" name="type_filter" value="month">
+              <button type="submit" class="btn btn-xs btn-warning btn-icon rounded-pill">
+                <span class="btn-inner--icon"><i class="fas fa-chart-bar"></i></span>
+                <span class="btn-inner--text">Месяц</span>
+              </button>
+            {{/is}}
+            {{#is type_filter 'month'}}
+              <input type="hidden" name="type_filter" value="year">
+              <button type="submit" class="btn btn-xs btn-warning btn-icon rounded-pill">
+                <span class="btn-inner--icon"><i class="fas fa-chart-bar"></i></span>
+                <span class="btn-inner--text">Год</span>
+              </button>
+            {{/is}}
+        </form>
+    </div>
+  </div>
+  <div class="row mb-3 mt-3">
+    <div class="col-xl-3 col-md-6">
+      <div class="card card-stats">
+        <!-- Card body -->
+        <div class="card-body">
+          <div class="row">
+            <div class="col-9">
+              <h6 class="text-muted mb-1">Баланс</h6>
+              <span class="h3 font-weight-bold mb-0 ">{{stats.balance.value}} $</span>
+            </div>
+            {{#if stats.balance.last}}
+              <div class="col-3">
+                {{#ifSign stats.balance.last -1}}
+                  <span class="badge badge-xs badge-soft-success ml-2"><i class="fas fa-arrow-up"></i> {{stats.balance.last}} %</span>
+                {{else}}
+                  <span class="badge badge-xs badge-soft-warning ml-2"><i class="fas fa-arrow-down"></i> {{stats.balance.last}} %</span>
+                {{/ifSign}}
+              </div>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+      <div class="card card-stats">
+        <!-- Card body -->
+        <div class="card-body">
+          <div class="row">
+            <div class="col-9">
+              <h6 class="text-muted mb-1">Подписки активные</h6>
+              <span class="h3 font-weight-bold mb-0 ">{{stats.active_acc.value}}</span>
+            </div>
+             {{#if stats.active_acc.last}}
+              <div class="col-3">
+                {{#ifSign stats.active_acc.last -1}} 
+                   <span class="badge badge-xs badge-soft-success ml-2"><i class="fas fa-arrow-up"></i> {{stats.active_acc.last}} %</span>
+                {{else}}
+                    <span class="badge badge-xs badge-soft-warning ml-2"><i class="fas fa-arrow-down"></i> {{stats.active_acc.last}} %</span>
+                {{/ifSign}}
+              </div>
+             {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+      <div class="card card-stats">
+        <!-- Card body -->
+        <div class="card-body">
+          <div class="row">
+            <div class="col-9">
+              <h6 class="text-muted mb-1">Всего</h6>
+              <h6 class="text-muted mb-1">подписок</h6>
+              <span class="h3 font-weight-bold mb-0 ">{{stats.total_acc.value}}</span>
+            </div>
+            {{#if stats.total_acc.last}}
+              <div class="col-3">
+                {{#ifSign stats.total_acc.last -1}}
+                    <span class="badge badge-xs badge-soft-success ml-2"><i class="fas fa-arrow-up"></i> {{stats.total_acc.last}} %</span>
+                {{else}}
+                    <span class="badge badge-xs badge-soft-warning ml-2"><i class="fas fa-arrow-down"></i> {{stats.total_acc.last}} %</span>
+                {{/ifSign}}
+              </div>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+      <div class="card card-stats">
+        <!-- Card body -->
+        <div class="card-body">
+          <div class="row">
+            <div class="col-9">
+              <h6 class="text-muted mb-1">Количество переходов</h6>
+              <span class="h3 font-weight-bold mb-0 ">{{stats.visited.value}}</span>
+            </div>
+            {{#if stats.visited.last}}
+              <div class="col-3">
+                {{#ifSign stats.visited.last -1}}
+                     <span class="badge badge-xs badge-soft-success ml-2"><i class="fas fa-arrow-up"></i> {{stats.visited.last}} %</span>
+                {{else}}
+                     <span class="badge badge-xs badge-soft-warning ml-2"><i class="fas fa-arrow-down"></i> {{stats.visited.last}} %</span>
+                {{/ifSign}}
+              </div>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    {{#if stats.sales.last}}
+    <div class="col-md-3">
+      <div class="card card-fluid">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col">
+              <h6 class="text-sm mb-0">Эффективность</h6>
+              {{#ifSign stats.sales.last -1}}
+                  <span class="badge badge-xs badge-soft-success ml-2"><i class="fas fa-arrow-up"></i> {{stats.sales.last}} %</span>
+              {{else}}
+                  <span class="badge badge-xs badge-soft-denger ml-2"><i class="fas fa-arrow-down"></i> {{stats.sales.last}} %</span>
+              {{/ifSign}}
+            </div>
+            {{!-- <div class="col-4">
+              <div style="max-width: 100px;">
+                <div class="spark-chart" data-toggle="spark-chart" data-type="line" data-height="30"
+                  data-color="warning" data-dataset="[47, 94, 24, 18, 26, 65, 31, 47, 10, 44, 45]"></div>
+              </div>
+            </div> --}}
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+    <div class="col-md-3">
+      <div class="card card-fluid">
+        <div class="card-body">
+          <div class="row align-items-center">
+                <div class="col">
+                  <h6 class="text-sm mb-0">
+                      Заработок
+                  </h6>
+                  {{stats.profit.value}}
+                  <span class="text-nowrap h6 text-muted text-sm">{{stats.sales.value}} $ </span>
+                  {{#if stats.sales.last}}
+                    {{#ifSign stats.sales.last -1}}
+                       <span class="badge badge-xs badge-soft-success ml-2"><i class="fas fa-arrow-up"></i> {{stats.sales.last}} %</span>
+                    {{else}}
+                       <span class="badge badge-xs badge-soft-warning ml-2"><i class="fas fa-arrow-down"></i> {{stats.sales.last}} %</span>
+                    {{/ifSign}}
+                  {{/if}}
+            </div>
+              {{#is type_filter 'year'}}
+                <div class="col-4">
+                  <div style="max-width: 100px;">
+                    <div class="spark-chart" data-toggle="spark-chart" data-type="line" data-height="30"
+                      data-color="success" data-dataset="[{{stats.profit_stats}}]"></div>
+                  </div>
+                </div>
+              {{/is}}
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="col-md-3">
+        <div class="card card-fluid">
+          <div class="card-body">
+              <div class="row align-items-center">
+                  <div class="col">
+                    <h6 class="text-sm mb-0">Платные подписки</h6>
+                    <span class="text-nowrap h6 text-muted text-sm">{{stats.total_acc.value}}</span>
+                    {{#if stats.total_acc.last}}
+                      {{#ifSign stats.total_acc.last -1}}
+                        <span class="badge badge-xs badge-soft-info ml-2"><i class="fas fa-arrow-up"></i>{{stats.total_acc.last}}%</span>
+                      {{else}}
+                        <span class="badge badge-xs badge-soft-warning ml-2"><i class="fas fa-arrow-down"></i>{{stats.total_acc.last}}%</span>
+                      {{/ifSign}}
+                    {{/if}}
+                  </div>
+                  {{#is type_filter 'year'}}
+                    <div class="col-4">
+                      <div style="max-width: 100px;">
+                        <div class="spark-chart" data-toggle="spark-chart" data-type="bar" data-height="30" data-color="primary" data-dataset="[{{stats.graph_followers}}]"></div>
+                      </div>
+                    </div>
+                  {{/is}}
+                </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-xl-8 col-md-6">
+      <div class="card card-fluid">
+        <!-- Chart -->
+        <div data-value="{{stats.graph_followers}}" id="apex-engagement" data-color="primary" data-height="280"></div>
+      </div>
+    </div>
+  </div>
+  {{/is}}
+</div>

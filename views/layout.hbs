@@ -1,0 +1,19 @@
+{{> header}}
+
+<body class="application application-offset sidenav-pinned ready">
+
+     <div class="container-fluid container-application">
+        <!-- Sidenav -->
+            {{#if account}}
+                {{> menu_sidebar}}
+            {{/if}}
+         <div class="main-content position-relative">
+            {{#if account}}
+                {{> menu_top}}
+            {{/if}}
+            {{{body}}}
+         </div>
+     </div>
+</body>
+
+{{> footer}}

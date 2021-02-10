@@ -1,0 +1,88 @@
+<div class="list-group mt-2">
+    <div class="list-group-item">
+        {{!-- <h1 class="mt-2 mb-2"> Выбранный аккаунт </h1> --}}
+        <div class="row align-items-center justify-content-sm-end">
+            <div class="col-auto">
+                <!-- Avatar -->
+                <a href="{{account.profile_url}}" target="_blank" class="avatar rounded-circle">
+                    <img alt="Image placeholder" src="{{account.profile_avatar_url}}" class="">
+                </a>
+            </div>
+            <div class="col ml-n2">
+                <a href="#!" class="d-block h6 mb-0">{{account.profile_name}}</a>
+                <p class="card-text text-sm text-muted mb-0">
+                    {{account.profile_nickname}}
+                </p>
+                <span class="text-grey small">Выбранный аккаунт</span>
+            </div>
+            {{#gt accounts.length 0}}
+                <div class="col-auto">
+                    <a href="#modal-chat" data-toggle="modal" class="btn btn-secondary btn-icon">
+                        Выбрать учётную запись
+                    </a>
+                </div>
+            {{/gt}}
+            <div class="col-auto">
+                <form method="POST" action="/instagram/delete">
+                    <input type="hidden" name="_id" value="{{account.id}}">
+                    <button type="submit" class="btn btn-xs btn-secondary btn-icon">
+                        <span class="btn-inner--icon"><i class="fas fa-minus"></i></span>
+                        <span class="btn-inner--text">Удалить</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+  <div class="modal fade fixed-right" id="modal-chat" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-vertical" role="document">
+      <div class="modal-content">
+        <div class="modal-header align-items-center">
+          <div class="modal-title">
+            <h6 class="mb-0">Доступные учётные записи</h6>
+            <span class="d-block text-sm">Всего {{accounts.length}}</span>
+          </div>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="scrollbar-inner">
+          <!-- Chat contacts -->
+          {{#if accounts}}
+          <div class="list-group list-group-flush">
+            {{#each accounts}}
+                <a href="/instagram/setmain/{{_id}}" class="list-group-item list-group-item-action">
+                <div class="d-flex align-items-center" data-toggle="tooltip" data-placement="right" data-title="">
+                    <div>
+                        <div class="avatar-parent-child">
+                            <img alt="Image placeholder" src="{{profile_avatar_url}}" class="avatar  rounded-circle">
+                            {{#if main}}
+                                <span class="avatar-child avatar-badge bg-success"></span>
+                            {{else}}
+                                <span class="avatar-child avatar-badge bg-warning"></span>
+                            {{/if}}
+                        </div>
+                    </div>
+                    <div class="flex-fill ml-3">
+                    <h6 class="text-sm mb-0">{{profile_nickname}}</h6>
+                    <p class="text-sm mb-0">
+                        {{profile_name}}
+                    </p>
+                    </div>
+                </div>
+                </a>
+            {{/each}}
+          </div>
+          {{else}}
+                <span>Нет активных аккаунтов</span>
+          {{/if}}
+        </div>
+        <div class="modal-footer py-3 mt-auto">
+          <a href="/instagram/view" class="btn btn-block btn-sm btn-neutral btn-icon rounded-pill">
+            <span class="btn-inner--icon"><i class="fab fa-account"></i></span>
+            <span class="btn-inner--text">Посмотреть аккаунты</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
